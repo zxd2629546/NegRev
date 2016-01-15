@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= full_title(yield(:title)) %></title>
+  <%= favicon_link_tag "logo-icon.ico" %>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+
+</head>
+<body class="<%= "home" if !@is_home.nil? %>" role="document">
+<%= render 'layouts/header' %>
+<div class="container-fluid">
+  <%= %>
+  <% flash.each do |key, value| %>
+      <div class="alert alert-danger alert-<%= key %>" role="alert"><%= value %></div>
+  <% end %>
+  <%= yield %>
+</div>
+<%= render 'layouts/footer' %>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<% provide(:title, @user.name) %>
+<div class="row">
+  <aside class="span4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.name %>
+      </h1>
+    </section>
+  </aside>
+  <div class="span8">
+    <% if @user.comments.any? %>
+        <h3 class="page-header">Microposts (<%= @user.comments.count %>)</h3>
+        <ol class="microposts">
+          <%= render @comments %>
+        </ol>
+
+        <%= will_paginate @comments %>
+    <% else %>
+        <h3 class="page-header">历史评论 (<%= @user.comments.count %>)</h3>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="container theme-showcase">
+    <div class="page-header">
+        <span style="font-size: 25px">商品介绍</span>
+    </div>
+    <div class="col-md-6">
+      <img class="img-thumbnail" data-img="1" width="350" height="350" src="<%= @product.img %>">
+    </div>
+    <div class="col-md-6">
+        <p class="lead">
+          <pre style="padding: 0px;white-space: pre-wrap; word-wrap: break-word; font-size: 16px;">
+            <div style="margin-left: 100px;">
+            <span  style="height: 350px"><%= @product.desc %></span></div>
+          </pre>
+        </p>
+    </div>
+</div>
+<div class="container theme-showcase">
+    <div class="page-header">
+      <span style="font-size: 25px">差评分析</span>
+    </div>
+</div>
+<div class="container theme-showcase">
+    <div class="page-header">
+      <span style="font-size: 20px">评论区</span>
+    </div>
+    <ul style="margin-bottom: 50px">
+    <% @comments.each do |comment| %>
+        <li>
+            <span class="user page-header">
+              <% if comment.name.nil? %>
+                <%= comment.user.name %>
+              <% else %>
+                <%= comment.name %>
+              <% end %>
+            </span>
+            <span class="content"><pre><%= comment.content.strip %></pre></span>
+            <span class="text-muted">
+            Posted
+              <% if comment.name.nil? %>
+                  <%= time_ago_in_words(comment.create_at) %> ago.
+              <% else %>
+                  <%= time_ago_in_words(comment.release_time) %> ago.
+              <% end %>
+            </span>
+        </li>
+    <% end %>
+    </ul>
+    <%= render 'shared/comment_form'%>
+</div>

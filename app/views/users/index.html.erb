@@ -1,0 +1,20 @@
+<% provide(:title, '用户列表') %>
+<h1>All users</h1>
+<% half = @users.size / 2%>
+    <table align="center" width="50%">
+      <tr>
+        <td style="padding-left: 80px;">
+          <ul class="users">
+            <%= render @users[0, half] %>
+          </ul>
+        </td>
+        <td style="padding-left: 100px;">
+          <ul class="users">
+            <%= render @users[half, @users.size - half] %>
+          </ul>
+        </td>
+      </tr>
+    </table>
+<div align="center">
+    <%= will_paginate %>
+</div>

@@ -1,0 +1,11 @@
+<li>
+    <span class="content"><%= comment.content %></span>
+    <span class="text-muted">
+    <%= time_ago_in_words(comment.created_at) %> 以前发表.
+    </span>
+      <% if current_user?(comment.user) %>
+          <%= link_to "delete", comment, method: :delete,
+                      data: { confirm: "You sure?" },
+                      title: comment.content %>
+      <% end %>
+</li>

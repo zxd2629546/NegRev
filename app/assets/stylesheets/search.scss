@@ -1,0 +1,21 @@
+// Place all the styles related to the search controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.home {
+  background-image: url(landscapes.jpg);  //写相对路径
+}
+#navigation {
+  font-weight: bold;
+  font-size: 18px;
+  margin-top: 15px;
+  margin-right: -2px;
+}
+
+.logo_main {
+  text-align: center; margin-top: 160px;
+}
+
+input::-ms-input-placeholder{text-align: center;}
+input::-webkit-input-placeholder{text-align: center;}
+
+

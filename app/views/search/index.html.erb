@@ -1,0 +1,23 @@
+<div class="logo_main">
+    <%= image_tag "logo_main.png" %>
+</div>
+<div class="col-md-3"></div>
+<div class="col-md-6">
+  <form action="/search/index" method="GET">
+    <div class="input-group input-group-lg">
+      <input id="search_query" type="text" class="form-control" placeholder="       搜索差评，挑出精品" name="query">
+      <span class="input-group-btn"><button class="btn btn-default" type="submit" value="submit">&nbsp;
+        <span class="glyphicon glyphicon-search" aria-hidden="true"></span>&nbsp;</button></span>
+    </div>
+  </form>
+</div>
+<div class="zj" style="margin-top: 50px">
+    <% if !@products.nil? and @products.any? %>
+        <div class="alert alert-info" role="alert">
+            您是否在找：
+            <% @products.each do |product| %>
+                <a href="/product/show?id=<%= product.id %>">&nbsp<%= product.name %></a>
+            <% end %>
+        </div>
+    <% end %>
+</div>
