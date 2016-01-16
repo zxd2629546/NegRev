@@ -206,6 +206,7 @@ DEPENDENCIES
   faker
   jbuilder (= 2.2.3)
   jquery-rails (= 4.0.3)
+  nokogiri
   pg (= 0.15.1)
   rails (= 4.2.2)
   rspec-rails
