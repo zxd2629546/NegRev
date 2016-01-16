@@ -47,6 +47,7 @@ gem 'faker'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'nokogiri'
+gem 'json'
 
 group :test do
   gem 'selenium-webdriver'
