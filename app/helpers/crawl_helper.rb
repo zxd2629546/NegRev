@@ -10,6 +10,7 @@ module CrawlHelper
   $jd_link_regexp = /href\=\"\/\/item\.jd\.com\/[^\"]*html\"/
   $jd_review_link_regexp = /href\=\"[^\"]*review.shtml\"/
   $jd_comment_version_regexp = /commentVersion:'\d+'/
+  $TAGS = %w(反映慢 耗电 分辨率低 经常死机 无法接打电话 开机慢 性价比低 信号差 配色少 预装软件太多)
 
   class CrawlZOL
     def initialize depth
@@ -231,6 +232,7 @@ module CrawlHelper
       product.name= name
       product.desc= desc
       product.img= img.gsub /\/n5\//, "/n1/"
+      product.tags= $TAGS.shuffle![0, 3].join(' ')
       first = Product.where({:img => img}).first
       if first.nil?
         product.save!

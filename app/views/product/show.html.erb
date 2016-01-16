@@ -18,6 +18,13 @@
     <div class="page-header">
       <span style="font-size: 25px">差评分析</span>
     </div>
+    <div style="margin-left: 30px">
+      <% if !@product.tags.nil? %>
+          <% @product.tags.split.each do |tag| %>
+            <span class="label label-danger" style="font-size: 16px;"><%= tag %></span>
+          <% end %>
+      <% end %>
+    </div>
 </div>
 <div class="container theme-showcase">
     <div class="page-header">
