@@ -103,6 +103,7 @@ module CrawlHelper
           cur_cnt += json['comments'].size
         rescue
           cur_cnt += 10086
+          puts "crawl review fail"
         end
         if poor_cnt.nil? or cur_cnt >= poor_cnt
           break
@@ -228,26 +229,16 @@ module CrawlHelper
     end
 
     def save_product name, img, desc
-      puts "1"
       product = Product.new
-      puts "1"
       product.name= name
-      puts "1"
       product.desc= desc
-      puts "1"
       product.img= img.gsub /\/n5\//, "/n1/"
-      puts "1"
       product.tags= $TAGS.shuffle![0, 3].join(' ')
-      puts "1"
       first = Product.where({:img => img}).first
-      puts "1"
       if first.nil?
-        puts "2"
         product.save!
-        puts "3"
         return product.id
       end
-      puts "1"
       return first.id
     end
 
