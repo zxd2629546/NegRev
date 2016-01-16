@@ -106,8 +106,9 @@ module CrawlHelper
           puts "1"
           cur_cnt += json['comments'].size
           puts "1"
-        rescue
+        rescue Exception => e
           cur_cnt += 10086
+          puts e.message
           puts "crawl review fail"
         end
         if poor_cnt.nil? or cur_cnt >= poor_cnt
