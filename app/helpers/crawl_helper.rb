@@ -228,10 +228,15 @@ module CrawlHelper
     end
 
     def save_product name, img, desc
+      puts "1"
       product = Product.new
+      puts "1"
       product.name= name
+      puts "1"
       product.desc= desc
+      puts "1"
       product.img= img.gsub /\/n5\//, "/n1/"
+      puts "1"
       product.tags= $TAGS.shuffle![0, 3].join(' ')
       puts "1"
       first = Product.where({:img => img}).first
