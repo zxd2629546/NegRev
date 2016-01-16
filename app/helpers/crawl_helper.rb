@@ -266,10 +266,15 @@ module CrawlHelper
       links.each do |link|
         begin
           img = crawl.crawl_img link
+          puts "1"
           desc = crawl.crawl_desc link
+          puts "1"
           pro_name = crawl.parse_product_name link
+          puts "1"
           pro_id = save_product pro_name, img, desc
+          puts "1"
           comments = crawl.crawl_reviews link, 2
+          puts "1"
           comments.each do |comment|
             save_bad_comment comment['nickname'], comment['creationTime'], comment['content'], pro_id
           end
