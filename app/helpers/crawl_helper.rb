@@ -233,11 +233,16 @@ module CrawlHelper
       product.desc= desc
       product.img= img.gsub /\/n5\//, "/n1/"
       product.tags= $TAGS.shuffle![0, 3].join(' ')
+      puts "1"
       first = Product.where({:img => img}).first
+      puts "1"
       if first.nil?
+        puts "2"
         product.save!
+        puts "3"
         return product.id
       end
+      puts "1"
       return first.id
     end
 
@@ -266,15 +271,10 @@ module CrawlHelper
       links.each do |link|
         begin
           img = crawl.crawl_img link
-          puts "1"
           desc = crawl.crawl_desc link
-          puts "1"
           pro_name = crawl.parse_product_name link
-          puts "1"
           pro_id = save_product pro_name, img, desc
-          puts "1"
           comments = crawl.crawl_reviews link, 2
-          puts "1"
           comments.each do |comment|
             save_bad_comment comment['nickname'], comment['creationTime'], comment['content'], pro_id
           end
