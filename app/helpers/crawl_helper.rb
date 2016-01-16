@@ -97,10 +97,15 @@ module CrawlHelper
       0.upto(limit) do |page|
         json_addreess = @util.from_comment_json_address id, comment_version, page
         begin
+          puts "1"
           json = JSON.parse open(json_addreess).read()[/\{.+\}/]
+          puts "1"
           poor_cnt = json['productCommentSummary']['poorCount']
+          puts "1"
           comment_array += json['comments']
+          puts "1"
           cur_cnt += json['comments'].size
+          puts "1"
         rescue
           cur_cnt += 10086
           puts "crawl review fail"
