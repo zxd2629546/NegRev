@@ -274,7 +274,7 @@ module CrawlHelper
             save_bad_comment comment['nickname'], comment['creationTime'], comment['content'], pro_id
           end
         rescue
-          "some error happend"
+          logger.error "some error happend"
         end
       end
     end
