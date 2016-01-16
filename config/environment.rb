@@ -12,4 +12,4 @@ def start_crawl
   end
 end
 
-Thread.new {start_crawl}
+#Thread.new {start_crawl}
