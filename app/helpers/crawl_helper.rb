@@ -96,6 +96,9 @@ module CrawlHelper
       comment_array = []
       0.upto(limit) do |page|
         json_addreess = @util.from_comment_json_address id, comment_version, page
+        if json_addreess.nil?
+          puts "mgb"
+        end
         begin
           puts "1"
           json = JSON.parse open(json_addreess).read()[/\{.+\}/]
@@ -109,6 +112,7 @@ module CrawlHelper
         rescue Exception => e
           cur_cnt += 10086
           puts e.message
+          puts e.backtrace.inspect
           puts "crawl review fail"
         end
         if poor_cnt.nil? or cur_cnt >= poor_cnt
