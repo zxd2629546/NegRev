@@ -7,7 +7,7 @@ class SearchController < ApplicationController
       @products = Product.find_by_sql "select id, name from products where name like '%#{query}%'"
       if @products.size != 1
         if @products.size == 0
-          flash[:warn] = "没有匹配项，请重新输入"
+          flash[:warn] = "没有匹配项，程序猿将会尽快补充数据"
         end
         render search_index_path
       else
