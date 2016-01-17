@@ -2,6 +2,7 @@ require 'open-uri'
 require 'thread'
 require 'json'
 require 'nokogiri'
+require 'net/http'
 
 module CrawlHelper
   $zol_link_regexp = /href\=\"\/cell_phone\/[^\"]*\"/
@@ -88,7 +89,8 @@ module CrawlHelper
 
     def crawl_reviews target, limit
       puts "crawl reviews"
-      target_address = open(@util.from_review_link target.strip).read
+      refer = @util.from_review_link target.strip
+      target_address = open(refer).read
       tmp_str = target_address.scan($jd_comment_version_regexp)[0]
       comment_version = tmp_str[16, tmp_str.size - 17]
       id = @util.parse_link target
@@ -96,21 +98,22 @@ module CrawlHelper
       comment_array = []
       0.upto(limit) do |page|
         json_addreess = @util.from_comment_json_address id, comment_version, page
-        begin
-          puts "1"
-          tem_res = open(json_addreess).read()[/\{.+\}/]
-          puts tem_res
-          json = JSON.parse tem_res
-          puts "1"
+        # begin
+          http = Net::HTTP.new('club.jd.com', 80)
+          refer = 'http://item.jd.com/1856588.html'
+          path = '/productpage/p-1856588-s-1-t-3-p-0.html?callback=fetchJSON_comment98vv47370'
+          resp, data = http.get(path)
+        resp.each {|key, val| puts key + ' = ' + val}
+          puts @util.from_main_link(target)
+          json = JSON.parse data[/\{.+\}/]
           poor_cnt = json['productCommentSummary']['poorCount']
           comment_array += json['comments']
           cur_cnt += json['comments'].size
-        rescue Exception => e
-          cur_cnt += 10086
-          puts e.message
-          puts e.backtrace.inspect
-          puts "crawl review fail"
-        end
+        # rescue Exception => e
+        #   puts e.message
+        #   cur_cnt += 10086
+        #   puts "crawl review fail"
+        # end
         if poor_cnt.nil? or cur_cnt >= poor_cnt
           break
         end
@@ -271,7 +274,7 @@ module CrawlHelper
       links = crawl.crawl
 
       links.each do |link|
-        begin
+        # begin
           img = crawl.crawl_img link
           desc = crawl.crawl_desc link
           pro_name = crawl.parse_product_name link
@@ -280,9 +283,9 @@ module CrawlHelper
           comments.each do |comment|
             save_bad_comment comment['nickname'], comment['creationTime'], comment['content'], pro_id
           end
-        rescue
-          puts "some error happend"
-        end
+        # rescue
+        #   puts "some error happend"
+        # end
       end
     end
   end
