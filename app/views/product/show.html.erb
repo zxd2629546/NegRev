@@ -33,21 +33,15 @@
     <ul style="margin-bottom: 50px">
     <% @comments.each do |comment| %>
         <li>
-            <span class="user page-header">
-              <% if comment.name.nil? %>
-                <%= comment.user.name %>
-              <% else %>
-                <%= comment.name %>
-              <% end %>
-            </span>
-            <span class="content"><pre><%= comment.content.strip %></pre></span>
-            <span class="text-muted">
-            Posted
-              <% if comment.name.nil? %>
-                  <%= time_ago_in_words(comment.create_at) %> ago.
-              <% else %>
-                  <%= time_ago_in_words(comment.release_time) %> ago.
-              <% end %>
+          <% if comment.name.nil? %>
+              <% name = comment.user.name %>
+              <% time = time_ago_in_words(comment.create_at) %>
+          <% else %>
+              <% name = comment.name %>
+              <% time = time_ago_in_words(comment.release_time) %>
+          <% end %>
+            <span class="content">
+              <pre><%= comment.content.strip %> <span class="text-muted"><%=" #{name} 来自京东 Posted #{time} ago" %></span></pre>
             </span>
         </li>
     <% end %>
